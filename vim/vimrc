@@ -1,9 +1,15 @@
 "-----------------------------------------------------------------------------
 " Global Stuff
 "-----------------------------------------------------------------------------
+" Full VIm
+set nocompatible
+
+" File Encoding
+set encoding=utf=8
 
 filetype off
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 " Set filetype stuff to on
 filetype on
@@ -72,7 +78,10 @@ set guicursor+=r-cr:hor20-Cursor
 set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 " set the gui options the way I like
-" set guioptions=ac
+set guioptions-=T
+set guioptions-=m
+set guioptions+=LlRrb
+set guioptions-=LlRrb
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -88,6 +97,7 @@ set timeoutlen=500
 set history=100
 
 " These commands open folds
+set foldenable
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
@@ -105,6 +115,8 @@ set key=
 
 " Make the command-line completion better
 set wildmenu
+set wildmode=list:longest,list:full
+set wildignore+=*.o,.git,.svn,node_module
 
 " Same as default except that I remove the 'u' option
 set complete=.,w,b,t
@@ -423,3 +435,24 @@ iab Fone      Phone
 :nohls
 
 
+"" LANGUAGE SPECIFIC
+
+" CSS
+au FileType css set expandtab tabstop=2 shiftwidth=2
+
+" HTML
+au FileType html,xhtml set formatoptions+=tl
+au FileType html,xhtml set foldmethod=indent smartindent
+au FileType html,xhtml set expandtab tabstop=3 shiftwidth=3
+au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
+
+" Ruby
+au FileType ruby setlocal ts=2 sts=2 sw=2 expandtab foldmethod=syntax
+
+" Python
+au FileType python set noexpandtab
+
+" JavaScript
+au FileType javascript setlocal ts=4 sts=4 sw=4
+au BufRead,BufNewFile *.json set ft=json
+       
