@@ -1,0 +1,13 @@
+set nocompatible
+
+" Filetype and Pathogen
+filetype off
+" Must come before any filetype lines
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
+" Coffee Scripts
+" AutoCompile
+autocmd BufWritePost *.coffee silent CoffeeMake! -b | cwindow
+" Folding
+let coffee_folding = 1

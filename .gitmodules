@@ -1,0 +1,9 @@
+[submodule "vim/plugins/vim-coffee-script"]
+	path = vim/plugins/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/plugins/vim-easymotion"]
+	path = vim/plugins/vim-easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim/plugins/tcomment_vim"]
+	path = vim/plugins/tcomment_vim
+	url = git://github.com/tomtom/tcomment_vim.git
