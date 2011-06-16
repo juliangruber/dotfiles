@@ -2,9 +2,6 @@
 " Global Stuff
 "-----------------------------------------------------------------------------
 
-" Forget being compatible with good ol' vi
-set noncompatible
-
 filetype off
 call pathogen#runtime_append_all_bundles()
 
@@ -75,7 +72,7 @@ set guicursor+=r-cr:hor20-Cursor
 set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 " set the gui options the way I like
-set guioptions=ac
+" set guioptions=ac
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -116,7 +113,7 @@ set complete=.,w,b,t
 set showfulltag
 
 " Set the textwidth to be 120 chars
-set textwidth=120
+" set textwidth=120
 
 " get rid of the silly characters in window separators
 set fillchars=""
@@ -263,18 +260,6 @@ set synmaxcol=2048
 let loaded_matchparen = 1
 
 "-----------------------------------------------------------------------------
-" MiniBufExplorer Plugin Settings
-"-----------------------------------------------------------------------------
-" Yup, I don't like this one either
-let loaded_minibufexplorer = 1
-
-"-----------------------------------------------------------------------------
-" ShowMarks Plugin Stuff
-"-----------------------------------------------------------------------------
-" I don't think I like this
-let g:loaded_showmarks = 1
-
-"-----------------------------------------------------------------------------
 " Source Explorer Plugin Settings
 "-----------------------------------------------------------------------------
 " The switch of the Source Explorer
@@ -330,52 +315,6 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
             \ '\.intermediate\.manifest$', '^mt.dep$' ]
 
 "-----------------------------------------------------------------------------
-" FSwitch Settings
-"-----------------------------------------------------------------------------
-nmap <silent> ,of :FSHere<CR>
-nmap <silent> ,ol :FSRight<CR>
-nmap <silent> ,oL :FSSplitRight<CR>
-nmap <silent> ,oh :FSLeft<CR>
-nmap <silent> ,oH :FSSplitLeft<CR>
-nmap <silent> ,ok :FSAbove<CR>
-nmap <silent> ,oK :FSSplitAbove<CR>
-nmap <silent> ,oj :FSBelow<CR>
-nmap <silent> ,oJ :FSSplitBelow<CR>
-
-"-----------------------------------------------------------------------------
-" SnipMate Settings
-"-----------------------------------------------------------------------------
-"source ~/.vim/snippets/support_functions.vim
-"source ~/.vim/snippets/support_functions_derek.vim
-
-function! ListKnownSnippetLanguageTypes(A, L, P)
-    let filesanddirs = split(globpath(g:snippets_dir, a:A . "*"), "\n")
-    let dirsonly = []
-    for f in filesanddirs
-        if isdirectory(f)
-            let each = split(f, '/')
-            let dirsonly = add(dirsonly, each[-1])
-        end
-    endfor
-    return dirsonly
-endfunction
-
-function! ReloadSnippets(type)
-    call ResetSnippets()
-    if a:type != ""
-        call ExtractSnips(g:snippets_dir . a:type, a:type)
-    else
-        let alltypes = ListKnownSnippetLanguageTypes("", "", "")
-        for type in alltypes
-            call ExtractSnips(g:snippets_dir . type, type)
-        endfor
-    endif
-endfunction
-
-command! -complete=customlist,ListKnownSnippetLanguageTypes
-         \ -nargs=? RS call ReloadSnippets("<args>")
-
-"-----------------------------------------------------------------------------
 " FuzzyFinder Settings
 "-----------------------------------------------------------------------------
 nmap ,fb :FuzzyFinderBuffer<CR>
@@ -385,36 +324,9 @@ nmap ,ft :FuzzyFinderTag<CR>
 "-----------------------------------------------------------------------------
 " UltiSnips Settings
 "-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/ultisnips
 let g:UltiSnipsExpandTrigger="<c-9>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-"-----------------------------------------------------------------------------
-" xpTemplate Settings
-"-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/xptemplate  
-
-"-----------------------------------------------------------------------------
-" Blogit Settings
-"-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/blogit
-
-"-----------------------------------------------------------------------------
-" Vim-Fugitive Settings
-"-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/fugitive   
-
-"-----------------------------------------------------------------------------
-" Mathit Settings
-"-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/matchit 
-
-"-----------------------------------------------------------------------------
-" TextObj-User Settings
-"-----------------------------------------------------------------------------
-set runtimepath+=~/.vim/textobj-user
-set runtimepath+=~/.vim/textobj-rubyblock
 
 "-----------------------------------------------------------------------------
 " CoffeeScript Settings
@@ -495,19 +407,19 @@ iab Fone      Phone
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
-if has("gui_running")
-    set guifont=Monaco:h12
+" if has("gui_running")
+"    set guifont=Monaco:h12
     colorscheme xoria256
-    if !exists("g:vimrcloaded")
-        winpos 0 0
-        if ! &diff
-            winsize 130 90
-        else
-            winsize 227 90
-        endif
-        let g:vimrcloaded = 1
-    endif
-endif
+"    if !exists("g:vimrcloaded")
+"        winpos 0 0
+"        if ! &diff
+"            winsize 130 90
+"        else
+"            winsize 227 90
+"        endif
+"        let g:vimrcloaded = 1
+"    endif
+"endif
 :nohls
 
 
