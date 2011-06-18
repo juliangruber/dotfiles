@@ -103,3 +103,6 @@
 [submodule "vim/bundle/mustache.vim"]
 	path = vim/bundle/mustache.vim
 	url = https://github.com/juvenn/mustache.vim
+[submodule "vim/bundle/MiniJVM.vim"]
+	path = vim/bundle/MiniJVM.vim
+	url = git://github.com/juliangruber/MiniJVM.vim.git
