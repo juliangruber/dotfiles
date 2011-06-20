@@ -105,4 +105,18 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 PATH=$PATH:~/bin
-[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+# ssh autocompletes
+_complete_ssh_hosts () {
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  comp_ssh_hosts=`
+    if [ -f ~/.ssh/config ]; then
+      cat ~/.ssh/config |       grep "^Host " |       awk '{print $2}'
+    fi
+  `
+  COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+  return 0
+}
+complete -F _complete_ssh_hosts ssh
