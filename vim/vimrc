@@ -261,6 +261,9 @@ set synmaxcol=2048
 
 set smartindent
 
+" Markdown to HTML
+nmap ,md :%!markdown <cr> 
+
 "-----------------------------------------------------------------------------
 " Source Explorer Plugin Settings
 "-----------------------------------------------------------------------------
@@ -305,7 +308,7 @@ nmap <F7> :NERDTreeToggle<CR>
 nmap <S-F7> :NERDTreeClose<CR>
 
 " Store the bookmarks file in perforce
-let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
+" let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
@@ -323,12 +326,43 @@ nmap ,fb :FuzzyFinderBuffer<CR>
 nmap ,ff :FuzzyFinderFile<CR>
 nmap ,ft :FuzzyFinderTag<CR>
 
+" -----------------------------------------------------------------------------
+" T-Comment Settings
+" ----------------------------------------------------------------------------
+map ,c <c-_><c-_>
+
 "-----------------------------------------------------------------------------
-" UltiSnips Settings
+" SnipMate Settings
 "-----------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<c-9>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"source ~/.vim/snippets/support_functions.vim
+"source ~/.vim/snippets/support_functions_derek.vim
+
+function! ListKnownSnippetLanguageTypes(A, L, P)
+    let filesanddirs = split(globpath(g:snippets_dir, a:A . "*"), "\n")
+    let dirsonly = []
+    for f in filesanddirs
+        if isdirectory(f)
+            let each = split(f, '/')
+            let dirsonly = add(dirsonly, each[-1])
+        end
+    endfor
+    return dirsonly
+endfunction
+
+function! ReloadSnippets(type)
+    call ResetSnippets()
+    if a:type != ""
+        call ExtractSnips(g:snippets_dir . a:type, a:type)
+    else
+        let alltypes = ListKnownSnippetLanguageTypes("", "", "")
+        for type in alltypes
+            call ExtractSnips(g:snippets_dir . type, type)
+        endfor
+    endif
+endfunction
+
+command! -complete=customlist,ListKnownSnippetLanguageTypes
+         \ -nargs=? RS call ReloadSnippets("<args>")
 
 "-----------------------------------------------------------------------------
 " CoffeeScript Settings
