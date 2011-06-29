@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# submodules
+git submodule init
+git submodule update
+
 # VIM
 rm -Rf ~/.vimrc.bak ~/.vim.bak
 mv ~/.vimrc ~/.vimrc.bak
